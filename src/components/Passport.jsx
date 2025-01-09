@@ -1,6 +1,13 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from "react";
+
 
 const Passport = () => {
+  useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, []);
     const [formData, setFormData] = useState({
         surname: "",
         givenName: "",
@@ -51,7 +58,7 @@ const Passport = () => {
       };
     
       return (
-        <div className="max-w-3xl mx-auto mt-10 p-8 border rounded-lg shadow-xl bg-white">
+        <div className="max-w-3xl mx-auto my-5 p-8 border rounded-lg shadow-xl bg-gray-light">
           <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Passport Application Form</h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

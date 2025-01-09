@@ -4,6 +4,7 @@ module.exports = withMT( {
   content: ['./src/**/*.{html,js,jsx}'],
   theme: {
     colors: {
+      'black': '#000000',
       'lightblue': '#91bbff',
       'blue': '#1fb6ff',
       'purple': '#7e5bef',
@@ -14,6 +15,17 @@ module.exports = withMT( {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#d3dce6',
+      'gold': '#f7bc63',
+      'transparent': 'transparent'
+    },
+    opacity: {
+      10: '0.1',
+      20: '0.2',
+      30: '0.3',
+      40: '0.4',
+      50: '0.5',
+      60: '0.6',
+      70: '0.7',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

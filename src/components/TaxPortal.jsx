@@ -1,194 +1,75 @@
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TaxPortal = () => {
-  const [taxDetails, setTaxDetails] = useState({
-    taxableIncome: 0,
-    taxAmount: 0,
-  });
-
-  const taxSlabs = [
-    { limit: 400000, rate: 0.01 },
-    { limit: 500000, rate: 0.1 },
-    { limit: Infinity, rate: 0.2 },
-  ];
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    // Parse all inputs as numbers, defaulting to 0 if empty
-    const grossIncome = parseFloat(data.income) || 0;
-    const medicalInsurance = parseFloat(data.medicalInsurance) || 0;
-    const providentFund = parseFloat(data.providentFund) || 0;
-    const charity = parseFloat(data.charity) || 0;
-
-    // Sum all deductions
-    const totalDeductions = medicalInsurance + providentFund + charity;
-
-    // Calculate taxable income
-    const taxableIncome = grossIncome - totalDeductions;
-
-    // Initialize tax calculation
-    let remainingIncome = taxableIncome > 0 ? taxableIncome : 0;
-    let taxAmount = 0;
-
-    // Apply tax slabs
-    for (const slab of taxSlabs) {
-      if (remainingIncome <= 0) break;
-      const taxableAtThisRate = Math.min(remainingIncome, slab.limit);
-      taxAmount += taxableAtThisRate * slab.rate;
-      remainingIncome -= slab.limit;
-    }
-
-    // Update tax details
-    setTaxDetails({
-      taxableIncome: taxableIncome > 0 ? taxableIncome : 0,
-      taxAmount: taxAmount.toFixed(2),
+  const img = "https://images.unsplash.com/photo-1554224155-a1487473ffd9?q=80&w=1570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
+  }, []);
+
+  const [panNumber, setPanNumber] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validatePan(panNumber)) {
+      navigate('/tax-portal-income-declarations'); // Replace with the actual path of the next page
+    } else {
+      setError('Invalid PAN number');
+    }
+  };
+
+  const validatePan = (pan) => {
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    return panRegex.test(pan);
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-50 to-blue-100">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-lg bg-white p-8 rounded-lg shadow-xl"
-      >
-        <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
-          Nepali Tax Payment Portal
-        </h1>
-
-        {/* PAN Number */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            PAN Number
-          </label>
-          <input
-            type="text"
-            {...register("panNumber", {
-              required: "PAN Number is required",
-              pattern: {
-                value: /^[0-9]{9}$/,
-                message: "PAN must be a 9-digit number",
-              },
-            })}
-            className={`w-full px-4 py-2 border ${
-              errors.panNumber ? "border-red-500" : "border-gray-300"
-            } rounded-lg focus:outline-none focus:ring focus:ring-blue-300`}
-          />
-          {errors.panNumber && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.panNumber.message}
-            </p>
-          )}
-        </div>
-
-        {/* Income */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Gross Income (NRs)
-          </label>
-          <input
-            type="number"
-            {...register("income", { required: "Gross Income is required" })}
-            className={`w-full px-4 py-2 border ${
-              errors.income ? "border-red-500" : "border-gray-300"
-            } rounded-lg focus:outline-none focus:ring focus:ring-blue-300`}
-          />
-          {errors.income && (
-            <p className="text-red-500 text-sm mt-1">{errors.income.message}</p>
-          )}
-        </div>
-
-        {/* Deductions */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Deductions
-          </label>
-          <div className="space-y-2">
-            {/* Medical Insurance */}
-            <div>
-              <label className="block text-gray-600">Medical Insurance</label>
-              <input
-                type="number"
-                defaultValue={0} // Default to 0
-                {...register("medicalInsurance")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-              />
-            </div>
-
-            {/* Provident Fund */}
-            <div>
-              <label className="block text-gray-600">Provident Fund</label>
-              <input
-                type="number"
-                defaultValue={0} // Default to 0
-                {...register("providentFund")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-              />
-            </div>
-
-            {/* Charity */}
-            <div>
-              <label className="block text-gray-600">Charity</label>
-              <input
-                type="number"
-                defaultValue={0} // Default to 0
-                {...register("charity")}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
-              />
-            </div>
+    <div className="relative min-h-screen flex items-center justify-center">
+      <img src={img} alt="img" className="absolute mt-5 inset-0 w-full h-full object-cover backdrop-blur-xl" />
+      <div className="relative max-w-4xl mx-auto my-5 p-8 bg-white rounded-lg shadow-md">
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">Tax Portal</h1>
+        <p className="text-center mb-8 text-gray-700">
+          Welcome to the Tax Portal. Please enter your PAN number to access your tax information and services.
+        </p>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-sm font-medium mb-1">PAN Number</label>
+            <input
+              type="text"
+              name="panNumber"
+              value={panNumber}
+              onChange={(e) => setPanNumber(e.target.value)}
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
+              placeholder="Enter your PAN number"
+            />
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           </div>
+          <button type="submit" className="w-full bg-blue-gray-500 hover:bg-blue-gray-600 text-white py-2 rounded hover:bg-blue-600 transition duration-200">
+            Submit
+          </button>
+        </form>
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4 text-blue-600">Services</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li>Income Declarations</li>
+            <li>Tax Deductions</li>
+            <li>Tax Calculation</li>
+            <li>Tax Payment History</li>
+            <li>Download Tax Forms</li>
+          </ul>
         </div>
-
-        {/* Payment Method */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Payment Method
-          </label>
-          <select
-            {...register("paymentMethod", {
-              required: "Payment Method is required",
-            })}
-            className={`w-full px-4 py-2 border ${
-              errors.paymentMethod ? "border-red-500" : "border-gray-300"
-            } rounded-lg focus:outline-none focus:ring focus:ring-blue-300`}
-          >
-            <option value="">Select a Payment Method</option>
-            <option value="connectIPS">ConnectIPS</option>
-            <option value="esewa">eSewa</option>
-            <option value="mobileBanking">Mobile Banking</option>
-          </select>
-          {errors.paymentMethod && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.paymentMethod.message}
-            </p>
-          )}
-        </div>
-
-        {/* Tax Details */}
-        <div className="mb-4 p-4 bg-gray-100 rounded-lg">
-          <p className="text-gray-700 font-medium">
-            Taxable Income: NRs {taxDetails.taxableIncome}
-          </p>
-          <p className="text-gray-700 font-medium">
-            Tax Amount: NRs {taxDetails.taxAmount}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4 text-blue-600">Contact Support</h2>
+          <p className="text-gray-700">
+            If you have any questions or need assistance, please contact our support team at <a href="mailto:support@taxportal.gov.np" className="text-blue">support@taxportal.gov.np</a>.
           </p>
         </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white bg-black py-2 px-4 rounded-lg hover:bg-blue-700 transition"
-        >
-          Submit & Proceed to Pay
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

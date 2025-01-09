@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   IconButton,
-  Card,
 } from "@material-tailwind/react";
 
 export function ComNavbar() {
@@ -29,7 +28,7 @@ export function ComNavbar() {
       >
         <a
           href="/"
-          className="flex items-center p-2 rounded-lg hover:bg-blue-gray-200 transition-all duration-200"
+          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
         >
           Home
         </a>
@@ -41,21 +40,8 @@ export function ComNavbar() {
         className="p-1 font-normal"
       >
         <a
-          href="/certificates"
-          className="flex items-center p-2 rounded-lg hover:bg-blue-gray-200 transition-all duration-200"
-        >
-          Certificates
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="medium"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <a
           href="/taxportal"
-          className="flex items-center p-2 rounded-lg hover:bg-blue-gray-200 transition-all duration-200"
+          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
         >
           Tax-Portal
         </a>
@@ -68,7 +54,7 @@ export function ComNavbar() {
       >
         <a
           href="/complaintbox"
-          className="flex items-center p-2 rounded-lg hover:bg-blue-gray-200 transition-all duration-200"
+          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
         >
           Complaint Box
         </a>
@@ -77,7 +63,7 @@ export function ComNavbar() {
   );
 
   return (
-    <div className="w-[80%] ml-[10%] mt-[1rem] shadow-xl shadow-light-blue-100 rounded-xl">
+    <div className="w-[80%] ml-[10%] mt-[1rem] shadow-md shadow-gold backdrop-blur-lg bg-white/30 rounded-xl sticky top-4 z-50">
       <Navbar className="sticky top-0 z-10 h-max max-w-full px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="flex items-center gap-2 cursor-pointer">
@@ -93,20 +79,25 @@ export function ComNavbar() {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="flex items-center gap-x-1">
+              <a href="/login">
               <Button
                 variant="text"
                 size="sm"
-                className="hidden lg:inline-block"
+                className="hidden bg-light-blue-800 hover:bg-light-blue-600 text-white lg:inline-block"
               >
                 <span>Log In</span>
               </Button>
+              </a>
+              <a href="/signup">
+
               <Button
                 variant="text"
                 size="sm"
-                className="hidden bg-gray text-white lg:inline-block"
-              >
-                <span>Sign in</span>
+                className="hidden bg-gray text-white hover:bg-blue-gray-600 lg:inline-block"
+                >
+                <span>Sign Up</span>
               </Button>
+                </a>
             </div>
             <IconButton
               variant="text"
@@ -154,7 +145,7 @@ export function ComNavbar() {
               <span>Log In</span>
             </Button>
             <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
+              <span>Sign Up</span>
             </Button>
           </div>
         </MobileNav>

@@ -1,23 +1,30 @@
-import React from 'react'
+
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 
 const NationalId = () => {
+  useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, []);
     const {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
+        // watch,
       } = useForm();
     
       const onSubmit = (data) => {
         console.log("Form Data Submitted:", data);
       };
     
-      const citizenshipImage = watch("citizenshipImage");
-      const passportImage = watch("passportImage");
+      // const citizenshipImage = watch("citizenshipImage");
+      // const passportImage = watch("passportImage");
     
       return (
-        <div className="max-w-4xl mx-auto p-6 bg-gray-100 shadow-lg rounded-md">
+        <div className="max-w-4xl mx-auto my-5 p-6 bg-gray-light shadow-lg rounded-md">
           <h1 className="text-2xl font-bold text-center mb-6">National Identity Registration Form</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Personal Details */}
