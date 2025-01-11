@@ -50,7 +50,7 @@ const TaxDeduction = () => {
     if (validateForm()) {
       const totalDeductions = selectedDeductions.reduce((acc, deduction) => acc + parseFloat(deductionAmounts[deduction]), 0);
       setDeductions(totalDeductions);
-      navigate('/tax-calculation');
+      navigate('/taxcalculation');
     } else {
       setError('Please fill out all fields correctly.');
     }
@@ -117,7 +117,7 @@ const TaxDeduction = () => {
             </div>
           ))}
           {error && <p className="text-red-500 mb-4">{error}</p>}
-          <button type="submit" className="w-full bg-blue-gray-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200">Submit</button>
+          <button type="submit" className="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-600 transition duration-200">Submit</button>
         </form>
       </div>
     </div>

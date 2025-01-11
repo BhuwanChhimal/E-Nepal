@@ -29,7 +29,7 @@ const IncomeDeclaration = () => {
     if (validateForm()) {
       const totalIncome = incomeSources.reduce((acc, source) => acc + parseFloat(source.amount), 0);
       setIncome(totalIncome);
-      navigate('/tax-deductions');
+      navigate('/taxdeduction');
     } else {
       setError('Please fill out all fields correctly.');
     }
@@ -93,7 +93,7 @@ const IncomeDeclaration = () => {
   </button>
   <button
     type="submit"
-    className="w-full bg-blue-gray-800 text-white py-2 rounded hover:bg-blue-gray-500 transition duration-200"
+    className="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-500 transition duration-200"
   >
     Submit
   </button>

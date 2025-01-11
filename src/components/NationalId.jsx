@@ -25,7 +25,7 @@ const NationalId = () => {
     
       return (
         <div className="max-w-4xl mx-auto my-5 p-6 bg-gray-light shadow-lg rounded-md">
-          <h1 className="text-2xl font-bold text-center mb-6">National Identity Registration Form</h1>
+          <h1 className="text-2xl font-bold text-center text-blue-800 mb-6">National Identity Registration Form</h1>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Personal Details */}
             <div>
@@ -191,7 +191,7 @@ const NationalId = () => {
             <div className="text-center flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-500 shadow-lg text-white bg-black font-bold rounded-md hover:bg-blue-gray-600"
+                className="px-6 py-2 bg-blue-800 shadow-lg text-white bg-black font-bold rounded-md hover:bg-blue-600"
               >
                 Submit
               </button>

@@ -6,7 +6,7 @@ module.exports = withMT( {
     colors: {
       'black': '#000000',
       'lightblue': '#91bbff',
-      'blue': '#1fb6ff',
+
       'purple': '#7e5bef',
       'pink': '#ff49db',
       'orange': '#ff7849',

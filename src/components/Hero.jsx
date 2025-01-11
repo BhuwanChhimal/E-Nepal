@@ -1,4 +1,5 @@
 import mountain from '../assets/mountain.jpg';
+import { useAuth } from '../context/AuthContext';
 import './Hero.css'; // Import the custom CSS file
 
 const Hero = () => {
@@ -8,7 +9,7 @@ const Hero = () => {
       behavior: 'smooth'
     });
   };
-
+  const {token} = useAuth();
   return (
     <div className="relative bg-cover bg-center mt-3 h-screen">
       <img src={mountain} alt="hero-banner-image" className="absolute inset-0 w-full h-full object-cover" />
@@ -21,7 +22,8 @@ const Hero = () => {
           onClick={handleGetStartedClick}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 shadow-lg breathing-effect"
         >
-          Get Started
+          {token ? 'Get Started' : 'Login to Get Started'}
+          
         </button>
       </div>
     </div>

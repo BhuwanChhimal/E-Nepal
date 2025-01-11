@@ -1,8 +1,15 @@
 import userlogo from "../assets/user_logo.png";
 import { Link } from "react-router-dom";
 import Hero from "./Hero"; // Import the Hero component
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, []);
   const containers = [
     { id: 1, image: userlogo, link: "/birthcertificate", heading: "Birth Certificate", subHeading: "Register your birth certificate" },
     { id: 2, image: userlogo, link: "/citizenship", heading: "Citizenship", subHeading: "Apply for citizenship" },
@@ -15,10 +22,10 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Hero /> {/* Include the Hero component */}
+    <div className="min-h-screen bg-gray-100 md:-mb-[12rem]">
+      
       <div className="p-8 mt-2">
-        <h1 className="text-4xl font-bold text-center mb-12 text-blue-600">E-Nepal Home Page</h1>
+        <h1 className="text-4xl font-bold text-center mb-[3rem] text-blue-800">E-Nepal Home Page</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {containers.map((container) => (
             <Link
@@ -31,7 +38,7 @@ const Home = () => {
                 alt={container.heading}
                 className="w-16 h-16 mb-4"
               />
-              <h2 className="text-xl font-semibold mb-2 text-blue-600">{container.heading}</h2>
+              <h2 className="text-2xl font-semibold mb-2 text-blue-800">{container.heading}</h2>
               <p className="text-gray-600">{container.subHeading}</p>
             </Link>
           ))}

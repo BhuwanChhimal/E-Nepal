@@ -79,7 +79,7 @@ const Citizenship = () => {
     
       return (
         <div className="max-w-4xl mx-auto my-5 p-8 bg-gray-light rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Citizenship Registration Form</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-blue-800">Citizenship Registration Form</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Personal Details */}
             <div>
@@ -362,7 +362,7 @@ const Citizenship = () => {
             <div className="text-center flex justify-end">
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-500 text-white bg-black font-bold rounded-md hover:bg-blue-gray-600"
+                className="px-6 py-2 bg-blue-800 text-white bg-black font-bold rounded-md hover:bg-blue-600"
               >
                 Submit
               </button>

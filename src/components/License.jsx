@@ -52,7 +52,7 @@ const License = () => {
     
       return (
         <div className="max-w-3xl mx-auto my-5 p-8 rounded-lg shadow-xl bg-gray-light">
-          <h1 className="text-3xl font-bold mb-6 text-center text-green-600">Driving License Registration Form</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">Driving License Registration Form</h1>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
@@ -190,7 +190,7 @@ const License = () => {
     
             <button
               type="submit"
-              className="px-6 py-2 bg-blue-500 shadow-lg text-white bg-black font-bold rounded-md hover:bg-blue-gray-600"
+              className="px-6 py-2 bg-blue-800 shadow-lg text-white font-bold rounded-md hover:bg-blue-600"
             >
               Submit
             </button>

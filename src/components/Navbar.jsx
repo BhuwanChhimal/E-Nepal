@@ -1,16 +1,33 @@
 import React from "react";
 import flag from "../assets/flag.gif";
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import userImage from "../assets/user_logo.png";
 import {
   Navbar,
   MobileNav,
   Typography,
   Button,
+  Menu,
+  Avatar,
+  MenuHandler,
+  MenuList,
+  MenuItem,
   IconButton,
 } from "@material-tailwind/react";
+// import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 export function ComNavbar() {
-  const [openNav, setOpenNav] = React.useState(false);
 
+  const {token, logout, user} = useAuth();
+  console.log(user);
+  const [openNav, setOpenNav] = React.useState(false);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+  // const { isAuthenticated, logout } = useAuth(); // Get isAuthenticated and logout from useAuth
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -28,7 +45,7 @@ export function ComNavbar() {
       >
         <a
           href="/"
-          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
+          className="flex items-center p-2 px-4 rounded-lg bg-red-600 text-white hover:bg-red-400 transition-all duration-200"
         >
           Home
         </a>
@@ -41,7 +58,7 @@ export function ComNavbar() {
       >
         <a
           href="/taxportal"
-          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
+          className="flex items-center p-2 rounded-lg hover:text-red-600  transition-all duration-200"
         >
           Tax-Portal
         </a>
@@ -54,7 +71,7 @@ export function ComNavbar() {
       >
         <a
           href="/complaintbox"
-          className="flex items-center p-2 rounded-lg hover:bg-gold transition-all duration-200"
+          className="flex items-center p-2 rounded-lg hover:text-red-600 transition-all duration-200"
         >
           Complaint Box
         </a>
@@ -63,7 +80,7 @@ export function ComNavbar() {
   );
 
   return (
-    <div className="w-[80%] ml-[10%] mt-[1rem] shadow-md shadow-gold backdrop-blur-lg bg-white/30 rounded-xl sticky top-4 z-50">
+    <div className="w-[80%] ml-[10%] mt-[1rem] shadow-md shadow-blue-800 backdrop-blur-lg bg-white/30 rounded-xl sticky top-4 z-50">
       <Navbar className="sticky top-0 z-10 h-max max-w-full px-4 py-2 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="flex items-center gap-2 cursor-pointer">
@@ -76,28 +93,31 @@ export function ComNavbar() {
               E-Nepal
             </Typography>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="mr-4 hidden lg:block">{navList}</div>
-            <div className="flex items-center gap-x-1">
-              <a href="/login">
-              <Button
-                variant="text"
-                size="sm"
-                className="hidden bg-light-blue-800 hover:bg-light-blue-600 text-white lg:inline-block"
-              >
-                <span>Log In</span>
-              </Button>
-              </a>
-              <a href="/signup">
-
-              <Button
-                variant="text"
-                size="sm"
-                className="hidden bg-gray text-white hover:bg-blue-gray-600 lg:inline-block"
-                >
-                <span>Sign Up</span>
-              </Button>
-                </a>
+          <div className="flex items-center gap-4 ">
+            <div className="mr-3 hidden lg:block">{navList}</div>
+            <div className="flex items-center gap-x-1 rounded-lg text-black uppercase">
+            {token ? (
+            <Menu>
+              <MenuHandler>
+                <Button variant="text" className="flex items-center gap-2">
+                  <Avatar src={userImage} alt="avatar" size="sm" />
+                </Button>
+              </MenuHandler>
+              <MenuList>
+                <MenuItem className="uppercase">{user?.name}</MenuItem>
+                <MenuItem className="text-red-700 font-semibold" onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <Button
+              variant="text"
+              className="ml-auto"
+              onClick={() => navigate('/login')}
+            >
+              Login
+            </Button>
+          )}
+         
             </div>
             <IconButton
               variant="text"
@@ -141,15 +161,20 @@ export function ComNavbar() {
         <MobileNav open={openNav}>
           {navList}
           <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="">
+            {token ? (
+               <Button onClick={handleLogout} fullWidth variant="text" size="sm" className="">
+               <span>Log out</span>
+             </Button>
+            ):(
+              <Button fullWidth variant="text" size="sm" className="">
               <span>Log In</span>
             </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign Up</span>
-            </Button>
+            )}
+           
           </div>
         </MobileNav>
       </Navbar>
     </div>
   );
 }
+export default ComNavbar;

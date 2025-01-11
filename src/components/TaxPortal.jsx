@@ -17,7 +17,7 @@ const TaxPortal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validatePan(panNumber)) {
-      navigate('/tax-portal-income-declarations'); // Replace with the actual path of the next page
+      navigate('/incomedeclaration'); // Replace with the actual path of the next page
     } else {
       setError('Invalid PAN number');
     }
@@ -32,7 +32,7 @@ const TaxPortal = () => {
     <div className="relative min-h-screen flex items-center justify-center">
       <img src={img} alt="img" className="absolute mt-5 inset-0 w-full h-full object-cover backdrop-blur-xl" />
       <div className="relative max-w-4xl mx-auto my-5 p-8 bg-white rounded-lg shadow-md">
-        <h1 className="text-4xl font-bold text-center mb-8 text-blue-600">Tax Portal</h1>
+        <h1 className="text-4xl font-bold text-center mb-8 text-blue-800">Tax Portal</h1>
         <p className="text-center mb-8 text-gray-700">
           Welcome to the Tax Portal. Please enter your PAN number to access your tax information and services.
         </p>
@@ -49,7 +49,7 @@ const TaxPortal = () => {
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
           </div>
-          <button type="submit" className="w-full bg-blue-gray-500 hover:bg-blue-gray-600 text-white py-2 rounded hover:bg-blue-600 transition duration-200">
+          <button type="submit" className="w-full bg-blue-800 hover:bg-blue-600 text-white py-2 roundedtransition duration-200">
             Submit
           </button>
         </form>
@@ -66,7 +66,7 @@ const TaxPortal = () => {
         <div className="mt-8">
           <h2 className="text-2xl font-bold mb-4 text-blue-600">Contact Support</h2>
           <p className="text-gray-700">
-            If you have any questions or need assistance, please contact our support team at <a href="mailto:support@taxportal.gov.np" className="text-blue">support@taxportal.gov.np</a>.
+            If you have any questions or need assistance, please contact our support team at <a href="mailto:support@taxportal.gov.np" className="text-blue-600">support@taxportal.gov.np</a>.
           </p>
         </div>
       </div>

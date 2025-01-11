@@ -38,7 +38,7 @@ const TaxCalculation = () => {
     <div className="relative min-h-screen flex items-center justify-center">
       <img src={img} alt="background" className="absolute inset-0 w-full h-full object-cover mt-5" />
       <div className="relative max-w-4xl mx-auto my-5 p-8 bg-white rounded-lg shadow-md w-full">
-        <h1 className="text-3xl font-bold mb-4 text-center text-blue-600">Tax Calculation</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center text-blue-800">Tax Calculation</h1>
         <p className="text-center text-gray-700 mb-6">
           Calculating your tax based on your income and deductions.
         </p>
@@ -48,7 +48,7 @@ const TaxCalculation = () => {
           </div>
         ) : taxAmount !== null ? (
           <div className="text-center">
-            <p className="text-xl font-bold mb-4">Your calculated tax amount is: NPR <span className='text-light-blue-700'>{taxAmount.toFixed(2)}</span></p>
+            <p className="text-xl font-bold mb-4">Your calculated tax amount is: NPR <span className='text-blue-800'>{taxAmount.toFixed(2)}</span></p>
             <button
               onClick={() => navigate('/tax-payment')}
               className="w-full bg-red-300 hover:bg-red-500 text-white py-2 rounded hover:bg-green-600 transition duration-200"
