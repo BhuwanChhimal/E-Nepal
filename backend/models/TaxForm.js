@@ -1,36 +1,17 @@
 const mongoose = require('mongoose');
 
-// Adjusting schema to better represent form data being submitted
 const TaxFormSchema = new mongoose.Schema({
-  income: { type: Number, required: true }, // User's total income
-  deductions: { 
-    type: [String], 
-    required: true, // List of deductions selected by the user
-  },
-  deductionAmounts: { 
-    type: Object, 
-    required: true, // Object to store amounts for each deduction type
-  },
-  otherDeduction: { 
-    type: String, 
-    default: '' // User's custom "other" deduction if applicable
-  },
-  taxAmount: { 
-    type: Number, 
-    required: true, // Calculated tax amount after deductions
-  },
-  totalTax: { 
-    type: Number, 
-    required: true, // Final total tax after considering all deductions
-  },
-  panNumber: { 
-    type: String, 
-    required: true, // PAN Number of the user for tax calculation purposes
-  },
-  createdAt: { 
-    type: Date, 
-    default: Date.now, // Date when the tax form was submitted
-  }
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    panNumber: { type: String, required: true },
+    incomeType: { type: Array, required: true },
+    incomeAmount: { type: Number, required: true },
+    deductionType: { type: Array, required: true },
+    deductionAmount: { type: Number, required: true },
+    taxAmount: { type: Number, required: true },  // Add taxAmount field
 });
 
 module.exports = mongoose.model('TaxForm', TaxFormSchema);

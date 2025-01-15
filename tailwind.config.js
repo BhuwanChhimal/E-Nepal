@@ -26,6 +26,8 @@ module.exports = withMT( {
       50: '0.5',
       60: '0.6',
       70: '0.7',
+      80: '0.8',
+      90: '0.9',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],

@@ -11,7 +11,8 @@ const passportRoutes = require('./routes/passport'); // Import passport routes
 const licenseRoutes = require('./routes/license');
 const panCardRoutes = require('./routes/panCard');
 const complaintBoxRoutes = require('./routes/complaintBox');
-const taxRoutes = require('./routes/tax');
+const taxFormRoutes = require('./routes/taxForm'); // Import tax form routes
+
 // Connect to MongoDB
 connectDB();
 
@@ -28,7 +29,8 @@ app.use('/api', passportRoutes); // Add passport routes
 app.use('/api', licenseRoutes);
 app.use('/api', panCardRoutes);
 app.use('/api', complaintBoxRoutes);
-app.use('/api', taxRoutes);
+app.use('/api', taxFormRoutes); // Add tax form routes
+
 
 const PORT = process.env.PORT || 5001;
 
