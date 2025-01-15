@@ -27,4 +27,4 @@ dist-ssr
 backend/.env
 
 #secure-auth
-backend /routes/auth.js
+backend/routes/auth.js
