@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const PassportSchema = new mongoose.Schema({
+  userId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+},
   surname: {
     type: String,
     required: true,
