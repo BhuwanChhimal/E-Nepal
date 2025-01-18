@@ -79,183 +79,248 @@ const BirthCertificate = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-5 bg-gray-light p-8 rounded-lg shadow-md">
-      <h1 className="text-4xl font-bold text-center mb-8 text-blue-800">Birth Certificate Application</h1>
-      <form className="space-y-6" onSubmit={handleSubmit} >
-        {/* Personal Details */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Personal Details</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">First Name</label>
-              <input
-                
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="First Name"
-              />
-              {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+    <div className="min-h-screen py-8">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <div className="bg-white rounded-xl shadow-blue-gray-300 shadow-xl overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8">
+          <h1 className="text-3xl font-bold text-white text-center">
+            Birth Certificate Application
+          </h1>
+          <p className="text-blue-100 text-center mt-2">
+            Government of Nepal
+          </p>
+        </div>
+
+        <div className="p-6 sm:p-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Personal Details Section */}
+            <div className="bg-blue-gray-50 rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                Personal Details
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Name Fields */}
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="First Name"
+                  />
+                  {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Middle Name
+                  </label>
+                  <input
+                    type="text"
+                    name="middleName"
+                    value={formData.middleName}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Middle Name"
+                  />
+                  {errors.middleName && <p className="mt-1 text-sm text-red-600">{errors.middleName}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="mt-1 block p-2 w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Last Name"
+                  />
+                  {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
+                </div>
+
+                {/* Date Fields */}
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Date of Birth (AD)
+                  </label>
+                  <input
+                    type="date"
+                    name="dobAd"
+                    value={formData.dobAd}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  />
+                  {errors.dobAd && <p className="mt-1 text-sm text-red-600">{errors.dobAd}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Date of Birth (BS)
+                  </label>
+                  <input
+                    type="text"
+                    name="dobBs"
+                    value={formData.dobBs}
+                    onChange={handleChange}
+                    className="mt-1 block p-2 w-full rounded-md border-blue-gray-300 shadow-sm bg-blue-gray-50 focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Auto-calculated"
+                    readOnly
+                  />
+                  {errors.dobBs && <p className="mt-1 text-sm text-red-600">{errors.dobBs}</p>}
+                </div>
+
+                {/* Gender Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Gender
+                  </label>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  {errors.gender && <p className="mt-1 text-sm text-red-600">{errors.gender}</p>}
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Middle Name</label>
-              <input
-                type="text"
-                name="middleName"
-                value={formData.middleName}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Middle Name"
-              />
-              {errors.middleName && <p className="text-red-500 text-sm">{errors.middleName}</p>}
+
+            {/* Address Section */}
+            <div className="bg-blue-gray-50 rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                Address Information
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Province
+                  </label>
+                  <input
+                    type="text"
+                    name="province"
+                    value={formData.province}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Province"
+                  />
+                  {errors.province && <p className="mt-1 text-sm text-red-600">{errors.province}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    District
+                  </label>
+                  <input
+                    type="text"
+                    name="district"
+                    value={formData.district}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="District"
+                  />
+                  {errors.district && <p className="mt-1 text-sm text-red-600">{errors.district}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Municipality
+                  </label>
+                  <input
+                    type="text"
+                    name="municipality"
+                    value={formData.municipality}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Municipality"
+                  />
+                  {errors.municipality && <p className="mt-1 text-sm text-red-600">{errors.municipality}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Street Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Street Address"
+                  />
+                  {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Last Name"
-              />
-              {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+
+            {/* Birth Information Section */}
+            <div className="bg-blue-gray-50 rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                Birth Information
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Place of Birth
+                  </label>
+                  <input
+                    type="text"
+                    name="birthPlace"
+                    value={formData.birthPlace}
+                    onChange={handleChange}
+                    className="mt-1 p-2 block w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    placeholder="Home/Hospital/Other"
+                  />
+                  {errors.birthPlace && <p className="mt-1 text-sm text-red-600">{errors.birthPlace}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-blue-gray-700 mb-1">
+                    Priority Level
+                  </label>
+                  <select
+                    name="priorityLevel"
+                    value={formData.priorityLevel}
+                    onChange={handleChange}
+                    className="mt-1 block p-2 w-full rounded-md border-blue-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                  >
+                    <option value="">Select Priority</option>
+                    <option value="emergency">Emergency</option>
+                    <option value="normal">Normal</option>
+                  </select>
+                  {errors.priorityLevel && <p className="mt-1 text-sm text-red-600">{errors.priorityLevel}</p>}
+                </div>
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Date of Birth (AD)</label>
-              <input
-                type="date"
-                name="dobAd"
-                value={formData.dobAd}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-              />
-              {errors.dobAd && <p className="text-red-500 text-sm">{errors.dobAd}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Date of Birth (BS)</label>
-              <input
-                type="text"
-                name="dobBs"
-                value={formData.dobBs}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Date of Birth (BS)"
-                readOnly
-              />
-              {errors.dobBs && <p className="text-red-500 text-sm">{errors.dobBs}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
+
+            {/* Submit Button */}
+            <div className="flex justify-end pt-6">
+              <button
+                type="submit"
+                className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
               >
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-              {errors.gender && <p className="text-red-500 text-sm">{errors.gender}</p>}
+                Submit Application
+              </button>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Province</label>
-              <input
-                type="text"
-                name="province"
-                value={formData.province}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Province"
-              />
-              {errors.province && <p className="text-red-500 text-sm">{errors.province}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">District</label>
-              <input
-                type="text"
-                name="district"
-                value={formData.district}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="District"
-              />
-              {errors.district && <p className="text-red-500 text-sm">{errors.district}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Municipality</label>
-              <input
-                type="text"
-                name="municipality"
-                value={formData.municipality}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Municipality"
-              />
-              {errors.municipality && <p className="text-red-500 text-sm">{errors.municipality}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Address"
-              />
-              {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
-            </div>
-          </div>
+          </form>
         </div>
-        {/* Birth Information */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Birth Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium mb-1">Birth Place</label>
-              <input
-                type="text"
-                name="birthPlace"
-                value={formData.birthPlace}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-                placeholder="Home/Hospital/Other"
-              />
-              {errors.birthPlace && <p className="text-red-500 text-sm">{errors.birthPlace}</p>}
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Priority Level</label>
-              <select
-                name="priorityLevel"
-                value={formData.priorityLevel}
-                onChange={handleChange}
-                className="w-full p-2 border rounded-md"
-              >
-                <option value="">Select</option>
-                <option value="emergency">Emergency</option>
-                <option value="normal">Normal</option>
-              </select>
-              {errors.priorityLevel && <p className="text-red-500 text-sm">{errors.priorityLevel}</p>}
-            </div>
-          </div>
-        </div>
-        {/* Submit Button */}
-        <div className="text-center flex justify-end">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-800 shadow-lg text-white bg-black font-bold rounded-md hover:bg-blue-600"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default BirthCertificate;

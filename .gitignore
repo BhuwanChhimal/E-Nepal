@@ -25,6 +25,3 @@ dist-ssr
 
 #enviorment variables
 backend/.env
-
-#secure-auth
-backend/routes/auth.js

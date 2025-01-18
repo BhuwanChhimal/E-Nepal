@@ -207,9 +207,9 @@ const TaxForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-xl shadow-blue-gray-200 shadow-xl overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8">
             <h1 className="text-3xl font-bold text-white text-center">
@@ -251,7 +251,7 @@ const TaxForm = () => {
 
             {/* Relationship Status */}
             <div className="bg-blue-gray-50 rounded-lg p-6 mb-4 ml-[1.37rem]">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Filing Status</h2>
+              <h2 className="text-xl font-semibold text-blue-gray-700 mb-4">Filing Status</h2>
               <div className="flex gap-6">
                 {['Individual', 'Married'].map((status) => (
                   <label key={status} className="flex items-center">

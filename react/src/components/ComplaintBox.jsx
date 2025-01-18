@@ -165,7 +165,7 @@ const ComplaintBox = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-10 p-8 border rounded-lg shadow-xl bg-gray-white">
+    <div className="max-w-3xl mx-auto my-10 p-8 border border-blue-gray-300 rounded-lg shadow-xl bg-blue-gray-50">
       <h1 className="text-3xl font-bold mb-6 text-center text-red-600">
         Complaint Box
       </h1>
