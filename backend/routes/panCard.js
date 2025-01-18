@@ -26,7 +26,7 @@ router.post(
         check('fatherName', 'Father Name is required').not().isEmpty(),
         check('dob', 'Date of Birth is required').isDate(),
         check('citizenshipNumber', 'Citizenship number is required').not().isEmpty(),
-        check('address', 'Address is required').not().isEmpty(),
+
         check('district', 'District is required').not().isEmpty(),
         check('municipality', 'Municipality is required').not().isEmpty(),
         check('wardNo', 'Ward number is required').not().isEmpty(),

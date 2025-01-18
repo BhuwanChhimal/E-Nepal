@@ -27,9 +27,9 @@ const Login = () => {
       login(token);
       // console.log('Login successful, navigating to home page');
       navigate('/'); // Redirect to the home page
-    } catch (err) {
-      console.error(err.response?.data || err.message);
-      setErrors(err.response?.data?.errors || { msg: err.message });
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+      setErrors(error.response?.data?.errors || { msg: error.message });
     }
   };
 
@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-10 p-8 bg-white rounded-lg shadow-lg">
+    <div className="max-w-md mx-auto my-10 p-8 bg-white rounded-lg shadow-lg ">
       {isSignup ? (
         <Signup handleFlip={handleFlip} />
       ) : (

@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { ADToBS } from 'bikram-sambat-js';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useAuth } from '../context/AuthContext';
+import axios from "axios";
+import { ADToBS } from "bikram-sambat-js";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 const NationalId = () => {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }, []);
 
@@ -34,18 +34,20 @@ const NationalId = () => {
   const { user } = useAuth();
   const userId = user?._id;
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'image') {
+    if (name === "image") {
       setFormData({ ...formData, image: files[0] });
-    } else if (name === 'dobAd') {
+    } else if (name === "dobAd") {
       const adDate = new Date(value);
       if (!isNaN(adDate)) {
-        const adDateString = `${adDate.getFullYear()}-${adDate.getMonth() + 1}-${adDate.getDate()}`;
+        const adDateString = `${adDate.getFullYear()}-${
+          adDate.getMonth() + 1
+        }-${adDate.getDate()}`;
         const bsDate = ADToBS(adDateString);
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -64,8 +66,8 @@ const NationalId = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!token) {
-      console.error('No token found');
-      setErrors({ msg: 'No token found' });
+      console.error("No token found");
+      setErrors({ msg: "No token found" });
       return;
     }
 
@@ -77,24 +79,29 @@ const NationalId = () => {
 
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       };
 
-      console.log('Submitting form with token:', token);
-      const res = await axios.post('http://localhost:5001/api/nationalId', formData, config);
-      console.log('Response from backend:', res.data);
+      console.log("Submitting form with token:", token);
+      const res = await axios.post(
+        "http://localhost:5001/api/nationalId",
+        formData,
+        config
+      );
+      console.log("Response from backend:", res.data);
       setSuccessMessage(res.data.msg);
       setErrors({});
-      navigate('/form-success');
+      navigate("/form-success");
     } catch (err) {
-      console.error('Error from backend:', err.response.data);
+      console.error("Error from backend:", err.response.data);
       setErrors(err.response.data.errors || { msg: err.response.data.msg });
     }
   };
 
-  const inputStyle = "w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
+  const inputStyle =
+    "w-full border border-blue-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 focus:border-blue-500";
   const labelStyle = "block text-sm font-medium text-gray-700 mb-1";
   const errorStyle = "text-red-500 text-sm mt-1";
 
@@ -116,7 +123,9 @@ const NationalId = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Details */}
               <div className="bg-blue-gray-50 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">Personal Details</h2>
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Personal Details
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className={labelStyle}>First Name</label>
@@ -128,7 +137,9 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.firstName && (
-                      <span className={errorStyle}>{errors.firstName.message}</span>
+                      <span className={errorStyle}>
+                        {errors.firstName.message}
+                      </span>
                     )}
                   </div>
                   <div>
@@ -151,7 +162,9 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.lastName && (
-                      <span className={errorStyle}>{errors.lastName.message}</span>
+                      <span className={errorStyle}>
+                        {errors.lastName.message}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -173,9 +186,13 @@ const NationalId = () => {
                       <option value="Female">Female</option>
                       <option value="Other">Other</option>
                     </select>
-                    {errors.gender && <p className={errorStyle}>{errors.gender}</p>}
-                    
-                    <label className={`${labelStyle} mt-4`}>Date of Birth (AD)</label>
+                    {errors.gender && (
+                      <p className={errorStyle}>{errors.gender}</p>
+                    )}
+
+                    <label className={`${labelStyle} mt-4`}>
+                      Date of Birth (AD)
+                    </label>
                     <input
                       type="date"
                       name="dobAd"
@@ -184,10 +201,14 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.dateOfBirth && (
-                      <span className={errorStyle}>{errors.dateOfBirth.message}</span>
+                      <span className={errorStyle}>
+                        {errors.dateOfBirth.message}
+                      </span>
                     )}
-                    
-                    <label className={`${labelStyle} mt-4`}>Date of Birth (BS)</label>
+
+                    <label className={`${labelStyle} mt-4`}>
+                      Date of Birth (BS)
+                    </label>
                     <input
                       type="text"
                       readOnly
@@ -196,8 +217,10 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={`${inputStyle} bg-blue-gray-100`}
                     />
-                    
-                    <label className={`${labelStyle} mt-4`}>Citizenship No.</label>
+
+                    <label className={`${labelStyle} mt-4`}>
+                      Citizenship No.
+                    </label>
                     <input
                       type="text"
                       name="citizenshipNumber"
@@ -211,10 +234,14 @@ const NationalId = () => {
 
               {/* Document Uploads */}
               <div className="bg-blue-gray-50 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">Required Documents</h2>
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Required Documents
+                </h2>
                 <div className="space-y-4">
                   <div>
-                    <label className={labelStyle}>Upload Citizenship Image</label>
+                    <label className={labelStyle}>
+                      Upload Citizenship Image
+                    </label>
                     <input
                       type="file"
                       name="citizenshipImage"
@@ -223,7 +250,30 @@ const NationalId = () => {
                       className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
                     />
                     {errors.citizenshipImage && (
-                      <span className={errorStyle}>{errors.citizenshipImage.message}</span>
+                      <span className={errorStyle}>
+                        {errors.citizenshipImage.message}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Passport Size Image */}
+                <div className="bg-blue-gray-50 rounded-lg p-6">
+                  <div>
+                    <label className={labelStyle}>
+                      Upload Your Passport-Size Image
+                    </label>
+                    <input
+                      type="file"
+                      accept="passportSizeImage/*"
+                      name="passportSizeImage"
+                      onChange={handleChange}
+                      className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
+                    />
+                    {errors.passportImage && (
+                      <span className={errorStyle}>
+                        {errors.passportImage.message}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -231,7 +281,9 @@ const NationalId = () => {
 
               {/* Permanent Address */}
               <div className="bg-blue-gray-50 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">Permanent Address</h2>
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Permanent Address
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className={labelStyle}>Province</label>
@@ -243,7 +295,9 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.permanentProvince && (
-                      <span className={errorStyle}>{errors.permanentProvince.message}</span>
+                      <span className={errorStyle}>
+                        {errors.permanentProvince.message}
+                      </span>
                     )}
                   </div>
                   <div>
@@ -256,7 +310,9 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.permanentDistrict && (
-                      <span className={errorStyle}>{errors.permanentDistrict.message}</span>
+                      <span className={errorStyle}>
+                        {errors.permanentDistrict.message}
+                      </span>
                     )}
                   </div>
                   <div>
@@ -269,7 +325,9 @@ const NationalId = () => {
                       className={inputStyle}
                     />
                     {errors.permanentWardNumber && (
-                      <span className={errorStyle}>{errors.permanentWardNumber.message}</span>
+                      <span className={errorStyle}>
+                        {errors.permanentWardNumber.message}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -277,7 +335,9 @@ const NationalId = () => {
 
               {/* Temporary Address */}
               <div className="bg-blue-gray-50 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">Temporary Address</h2>
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Temporary Address
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className={labelStyle}>Province</label>
@@ -312,23 +372,6 @@ const NationalId = () => {
                 </div>
               </div>
 
-              {/* Passport Size Image */}
-              <div className="bg-blue-gray-50 rounded-lg p-6">
-                <div>
-                  <label className={labelStyle}>Upload Passport-Size Image</label>
-                  <input
-                    type="file"
-                    accept="passportSizeImage/*"
-                    name="passportSizeImage"
-                    onChange={handleChange}
-                    className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
-                  />
-                  {errors.passportImage && (
-                    <span className={errorStyle}>{errors.passportImage.message}</span>
-                  )}
-                </div>
-              </div>
-
               {/* Submit Button */}
               <div className="flex justify-end pt-6">
                 <button
@@ -340,7 +383,9 @@ const NationalId = () => {
               </div>
 
               {successMessage && (
-                <p className="text-green-500 text-sm mt-4 text-center">{successMessage}</p>
+                <p className="text-green-500 text-sm mt-4 text-center">
+                  {successMessage}
+                </p>
               )}
             </form>
           </div>

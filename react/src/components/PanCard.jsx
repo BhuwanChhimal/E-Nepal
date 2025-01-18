@@ -2,7 +2,8 @@ import axios from "axios";
 import { ADToBS } from "bikram-sambat-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import {useAuth} from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
+
 const PanCard = () => {
   useEffect(() => {
     window.scrollTo({
@@ -10,13 +11,14 @@ const PanCard = () => {
       behavior: "smooth",
     });
   }, []);
+
   const [formData, setFormData] = useState({
     userId: "",
     fullName: "",
     fatherName: "",
     dob: "",
     citizenshipNumber: "",
-    address: "",
+
     district: "",
     municipality: "",
     wardNo: "",
@@ -26,12 +28,14 @@ const PanCard = () => {
     occupation: "",
     userImage: null,
   });
+
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const {user}=useAuth();
+  const { user } = useAuth();
   const userId = user?._id;
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'image') {
@@ -48,10 +52,10 @@ const PanCard = () => {
           userId: userId,
         }));
       } else {
-        setFormData({ ...formData, dobAd: value ,userId: userId,});
+        setFormData({ ...formData, dobAd: value, userId: userId });
       }
     } else {
-      setFormData({ ...formData, [name]: value ,userId: userId,});
+      setFormData({ ...formData, [name]: value, userId: userId });
     }
   };
 
@@ -76,9 +80,7 @@ const PanCard = () => {
         },
       };
 
-      console.log('Submitting form with token:', token);
       const res = await axios.post('http://localhost:5001/api/panCard', formData, config);
-      console.log('Response from backend:', res.data);
       setSuccessMessage(res.data.msg);
       setErrors({});
       navigate('/form-success');
@@ -88,135 +90,212 @@ const PanCard = () => {
     }
   };
 
+  const inputStyle = "w-full border border-blue-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 focus:border-blue-500";
+  const labelStyle = "block text-sm font-medium text-gray-700 mb-1";
+  const errorStyle = "text-red-500 text-sm mt-1";
+
   return (
-    <div className="max-w-3xl mx-auto my-5 p-8 border rounded-lg shadow-xl bg-gray-light">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">
-        PAN Card Registration Form
-      </h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="fatherName"
-            placeholder="Father's Name"
-            value={formData.fatherName}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="date"
-            name="dob"
-            placeholder="Date of Birth"
-            value={formData.dob}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="citizenshipNumber"
-            placeholder="Citizenship Number"
-            value={formData.citizenshipNumber}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            value={formData.address}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="district"
-            placeholder="District"
-            value={formData.district}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="municipality"
-            placeholder="Municipality"
-            value={formData.municipality}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="wardNo"
-            placeholder="Ward No"
-            value={formData.wardNo}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="tole"
-            placeholder="Tole"
-            value={formData.tole}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            type="text"
-            name="occupation"
-            placeholder="Occupation"
-            value={formData.occupation}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+    <div className="min-h-screen py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div className="bg-white rounded-xl shadow-blue-gray-300 shadow-lg overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8">
+            <h1 className="text-3xl font-bold text-white text-center">
+              PAN Card Registration Form
+            </h1>
+            <p className="text-blue-100 text-center mt-2">
+              Government of Nepal
+            </p>
+          </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-medium mb-2"
-            htmlFor="userImage"
-          >
-            Upload Your Image
-          </label>
-          <input
-            type="file"
-            name="userImage"
-            accept="image/*"
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+          <div className="p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Personal Details */}
+              <div className="bg-blue-gray-50 rounded-lg p-6">
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Personal Details
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelStyle}>Full Name</label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.fullName && <p className={errorStyle}>{errors.fullName}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Father's Name</label>
+                    <input
+                      type="text"
+                      name="fatherName"
+                      value={formData.fatherName}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.fatherName && <p className={errorStyle}>{errors.fatherName}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Date of Birth</label>
+                    <input
+                      type="date"
+                      name="dob"
+                      value={formData.dob}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.dob && <p className={errorStyle}>{errors.dob}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Citizenship Number</label>
+                    <input
+                      type="text"
+                      name="citizenshipNumber"
+                      value={formData.citizenshipNumber}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.citizenshipNumber && <p className={errorStyle}>{errors.citizenshipNumber}</p>}
+                  </div>
+                </div>
+              </div>
 
-        <button
-          type="submit"
-          className="px-6 py-2 bg-blue-800 shadow-lg text-white font-bold rounded-md hover:bg-blue-600"
-        >
-          Submit
-        </button>
-        {successMessage && <p className="text-green">{successMessage}</p>}
-      </form>
+              {/* Address Details */}
+              <div className="bg-blue-gray-50 rounded-lg p-6">
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Address Details
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                  <div>
+                    <label className={labelStyle}>District</label>
+                    <input
+                      type="text"
+                      name="district"
+                      value={formData.district}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.district && <p className={errorStyle}>{errors.district}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Municipality</label>
+                    <input
+                      type="text"
+                      name="municipality"
+                      value={formData.municipality}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.municipality && <p className={errorStyle}>{errors.municipality}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Ward No</label>
+                    <input
+                      type="text"
+                      name="wardNo"
+                      value={formData.wardNo}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.wardNo && <p className={errorStyle}>{errors.wardNo}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Tole</label>
+                    <input
+                      type="text"
+                      name="tole"
+                      value={formData.tole}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.tole && <p className={errorStyle}>{errors.tole}</p>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Details */}
+              <div className="bg-blue-gray-50 rounded-lg p-6">
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Contact Details
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelStyle}>Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.email && <p className={errorStyle}>{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Phone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.phone && <p className={errorStyle}>{errors.phone}</p>}
+                  </div>
+                  <div>
+                    <label className={labelStyle}>Occupation</label>
+                    <input
+                      type="text"
+                      name="occupation"
+                      value={formData.occupation}
+                      onChange={handleChange}
+                      className={inputStyle}
+                    />
+                    {errors.occupation && <p className={errorStyle}>{errors.occupation}</p>}
+                  </div>
+                </div>
+              </div>
+
+              {/* Document Upload */}
+              <div className="bg-blue-gray-50 rounded-lg p-6">
+                <h2 className="text-xl font-semibold text-blue-gray-800 mb-6">
+                  Required Documents
+                </h2>
+                <div>
+                  <label className={labelStyle}>Upload Your Image</label>
+                  <input
+                    type="file"
+                    name="userImage"
+                    accept="image/*"
+                    onChange={handleChange}
+                    className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
+                  />
+                  {errors.userImage && <p className={errorStyle}>{errors.userImage}</p>}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex justify-end pt-6">
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                >
+                  Submit Application
+                </button>
+              </div>
+
+              {successMessage && (
+                <p className="text-green-500 text-sm mt-4 text-center">
+                  {successMessage}
+                </p>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

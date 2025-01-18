@@ -22,10 +22,6 @@ const LicenseSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    address: {
-        type: String,
-        required: true,
-    },
     district: {
         type: String,
         required: true,

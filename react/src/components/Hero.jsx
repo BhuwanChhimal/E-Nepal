@@ -1,15 +1,19 @@
 import mountain from '../assets/mountain.jpg';
 import { useAuth } from '../context/AuthContext';
 import './Hero.css'; // Import the custom CSS file
-
+import { useNavigate } from 'react-router-dom';
 const Hero = () => {
+  const navigate = useNavigate();
+  const {token} = useAuth();
   const handleGetStartedClick = () => {
+    if(!token){
+      navigate('/login')
+    }
     window.scrollTo({
       top: window.innerHeight,
       behavior: 'smooth'
     });
   };
-  const {token} = useAuth();
   return (
     <div className="relative bg-cover bg-center mt-3 h-screen">
       <img src={mountain} alt="hero-banner-image" className="absolute inset-0 w-full h-full object-cover" />
