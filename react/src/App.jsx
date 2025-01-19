@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { TaxProvider } from "./context/TaxContext";
@@ -18,9 +18,36 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TaxForm from "./components/TaxForm";
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const duration = 3000 //  seconds
+    const intervalTime = 30 // Update every 40ms
+    const increment = 100 / (duration / intervalTime)
+
+    const interval = setInterval(() => {
+      setProgress(prevProgress => {
+        const nextProgress = prevProgress + increment
+        if (nextProgress >= 100) {
+          clearInterval(interval)
+          setIsLoading(false) // Immediately hide loading screen at 100%
+          return 100
+        }
+        return nextProgress
+      })
+    }, intervalTime)
+
+    return () =>  clearInterval(interval)
+
+    
+  }, [])
+
   const hideHeroPaths = [
     "/birthcertificate",
     "/citizenship",
@@ -36,7 +63,10 @@ function App() {
   return (
     <AuthProvider>
       <TaxProvider>
-        <div className="flex flex-col min-h-screen hero-pattern">
+        {isLoading && <LoadingScreen progress={progress} isLoading={isLoading}/> }
+        {!isLoading && (
+        <div className={`flex flex-col min-h-screen hero-pattern transition-opacity duration-500 
+          ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
           <ComNavbar />
           {!hideHeroPaths.includes(location.pathname) && <Hero />}
           <div className="flex-grow">
@@ -113,6 +143,7 @@ function App() {
           </div>
           <Footer />
         </div>
+        )}
       </TaxProvider>
     </AuthProvider>
   );

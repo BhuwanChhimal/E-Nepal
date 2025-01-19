@@ -3,7 +3,7 @@ import { ADToBS } from "bikram-sambat-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from '../context/AuthContext';
-
+import logo from "../assets/license-icon.png"
 const License = () => {
   useEffect(() => {
     window.scrollTo({
@@ -99,13 +99,16 @@ const License = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         <div className="bg-white rounded-xl shadow-blue-gray-300 shadow-lg overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-8">
+          <div className="bg-gradient-to-r relative from-blue-600 to-blue-700 px-6 py-8">
             <h1 className="text-3xl font-bold text-white text-center">
               Driving License Application Form
             </h1>
             <p className="text-blue-100 text-center mt-2">
               Government of Nepal
             </p>
+             <span className='absolute hidden md:block left-2 md:left-8 md:top-8 top-12'>
+                          <img src={logo} alt="logo" className="w-16 h-16 "  />
+                        </span>
           </div>
 
           <div className="p-6 sm:p-8">

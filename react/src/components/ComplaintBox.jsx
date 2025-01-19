@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
-
+import logo from "../assets/complaintbox-icon.png"
 const ComplaintBox = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -76,11 +76,14 @@ const ComplaintBox = () => {
   return (
     <div className="max-w-4xl mx-auto my-8 bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-red-400 to-red-600 px-6 py-8 text-center">
+      <div className="bg-gradient-to-r relative from-red-400 to-red-600 px-6 py-8 text-center">
         <h2 className="text-3xl font-bold text-white mb-2">Submit a Complaint</h2>
         <p className="text-blue-100">
           Please provide detailed information about your complaint
         </p>
+         <span className='absolute hidden md:block left-2 md:left-8 md:top-8 top-12'>
+                      <img src={logo} alt="logo" className="w-16 h-16 "  />
+                    </span>
       </div>
 
       {/* Error Message */}

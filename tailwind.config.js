@@ -19,6 +19,7 @@ module.exports = withMT( {
       'transparent': 'transparent'
     },
     opacity: {
+      0:'0',
       10: '0.1',
       20: '0.2',
       30: '0.3',
@@ -28,6 +29,7 @@ module.exports = withMT( {
       70: '0.7',
       80: '0.8',
       90: '0.9',
+      100:'1',
     },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
