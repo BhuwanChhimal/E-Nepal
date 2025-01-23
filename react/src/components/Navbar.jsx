@@ -74,7 +74,7 @@ export function ComNavbar() {
 
   return (
     <div className="w-[80%] ml-[10%] mt-[1rem] sticky top-4 z-50">
-      <Navbar className="sticky shadow-blue-800/70 shadow-lg rounded-full top-0 z-10 h-max max-w-full px-4 py-2 lg:px-8 lg:py-3">
+      <Navbar className="sticky shadow-blue-800/70 shadow-lg rounded-xl lg:rounded-full top-0 z-10 h-max max-w-full px-4 py-2 lg:px-8 lg:py-3">
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="flex items-center gap-2 cursor-pointer">
             <img src={flag} alt="flag-logo" width={25} height={25} />
