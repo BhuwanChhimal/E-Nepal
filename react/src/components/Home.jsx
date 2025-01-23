@@ -1,4 +1,3 @@
-import userlogo from "../assets/user_logo.png";
 import birthcertificateicon from "../assets/birth-certificate-icon.png";
 import citizenshipicon from "../assets/citizenship-icon.png";
 import nationalidicon from "../assets/nationalid.png";
@@ -8,7 +7,6 @@ import pancardicon from "../assets/pan-card-icon.png";
 import taxicon2 from "../assets/tax-icon-2.png";
 import complaintboxicon from "../assets/complaintbox-icon.png";
 import { Link } from "react-router-dom";
-import Hero from "./Hero"; // Import the Hero component
 import { useEffect } from "react";
 
 const Home = () => {
@@ -30,7 +28,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 lg:-mb-[12rem]"
+    <div className="min-h-screen homeLinksTransition lg:-mb-[12rem]"
     >
       <div className="p-8 mt-2 ">
         <h1 className="text-4xl font-bold text-center mb-[3rem] text-blue-800">E-Nepal Home Page</h1>

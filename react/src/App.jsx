@@ -18,11 +18,12 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TaxForm from "./components/TaxForm";
+// import { motion, AnimatePresence } from "framer-motion";
 
 
 function App() {
   const location = useLocation();
-  
+
   const hideHeroPaths = [
     "/birthcertificate",
     "/citizenship",
@@ -38,8 +39,10 @@ function App() {
   return (
     <AuthProvider>
       <TaxProvider>
-        <div className={`flex flex-col  min-h-screen hero-pattern transition-opacity duration-150 
-          `}>
+        <div
+          className={`flex flex-col  min-h-screen hero-pattern transition-opacity duration-150 
+          `}
+        >
           <ComNavbar />
           {!hideHeroPaths.includes(location.pathname) && <Hero />}
           <div className="flex-grow">
