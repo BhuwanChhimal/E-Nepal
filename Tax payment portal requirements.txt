@@ -1,5 +1,0 @@
-Tax payment portal requirements: 
-1.Enter Pan no
-2.specify individual/couple
-3.extra incomes
-4.Deductions(main headache)
