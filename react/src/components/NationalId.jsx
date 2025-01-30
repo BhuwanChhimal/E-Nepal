@@ -95,8 +95,21 @@ const NationalId = () => {
       setErrors({});
       navigate("/form-success");
     } catch (err) {
-      console.error("Error from backend:", err.response.data);
-      setErrors(err.response.data.errors || { msg: err.response.data.msg });
+      console.error('Error from backend:', err.response.data);
+      
+      // Handle express-validator array format
+      if (err.response.data?.errors && Array.isArray(err.response.data.errors)) {
+        const errorArray = err.response.data.errors;
+        const errorMessages = {};
+        errorArray.forEach(error => {
+          errorMessages[error.path] = error.msg; // Convert array to object
+        });
+        setErrors(errorMessages);
+      }
+      // Handle other error formats
+      else {
+        setErrors(err.response.data || { msg: 'An error occurred' });
+      }
     }
   };
 
@@ -141,7 +154,7 @@ const NationalId = () => {
                     />
                     {errors.firstName && (
                       <span className={errorStyle}>
-                        {errors.firstName.message}
+                        {errors.firstName}
                       </span>
                     )}
                   </div>
@@ -166,7 +179,7 @@ const NationalId = () => {
                     />
                     {errors.lastName && (
                       <span className={errorStyle}>
-                        {errors.lastName.message}
+                        {errors.lastName}
                       </span>
                     )}
                   </div>
@@ -203,11 +216,7 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.dateOfBirth && (
-                      <span className={errorStyle}>
-                        {errors.dateOfBirth.message}
-                      </span>
-                    )}
+                 {errors.dobAd && <span className={errorStyle}>{errors.dobAd}</span>}
 
                     <label className={`${labelStyle} mt-4`}>
                       Date of Birth (BS)
@@ -231,6 +240,7 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.citizenshipNumber && <span className={errorStyle}>{errors.citizenshipNumber}</span>}
                   </div>
                 </div>
               </div>
@@ -254,7 +264,7 @@ const NationalId = () => {
                     />
                     {errors.citizenshipImage && (
                       <span className={errorStyle}>
-                        {errors.citizenshipImage.message}
+                        {errors.citizenshipImage}
                       </span>
                     )}
                   </div>
@@ -275,7 +285,7 @@ const NationalId = () => {
                     />
                     {errors.passportImage && (
                       <span className={errorStyle}>
-                        {errors.passportImage.message}
+                        {errors.passportImage}
                       </span>
                     )}
                   </div>
@@ -299,7 +309,7 @@ const NationalId = () => {
                     />
                     {errors.permanentProvince && (
                       <span className={errorStyle}>
-                        {errors.permanentProvince.message}
+                        {errors.permanentProvince}
                       </span>
                     )}
                   </div>
@@ -314,7 +324,7 @@ const NationalId = () => {
                     />
                     {errors.permanentDistrict && (
                       <span className={errorStyle}>
-                        {errors.permanentDistrict.message}
+                        {errors.permanentDistrict}
                       </span>
                     )}
                   </div>
@@ -329,7 +339,7 @@ const NationalId = () => {
                     />
                     {errors.permanentWardNumber && (
                       <span className={errorStyle}>
-                        {errors.permanentWardNumber.message}
+                        {errors.permanentWardNumber}
                       </span>
                     )}
                   </div>
@@ -351,6 +361,7 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.temporaryProvince && <span className={errorStyle}>{errors.temporaryProvince}</span>}
                   </div>
                   <div>
                     <label className={labelStyle}>District</label>
@@ -361,6 +372,7 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.temporaryDistrict && <span className={errorStyle}>{errors.temporaryDistrict}</span>}
                   </div>
                   <div>
                     <label className={labelStyle}>Ward Number</label>
@@ -371,6 +383,8 @@ const NationalId = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.temporaryWardNumber && <span className={errorStyle}>{errors.temporaryWardNumber}</span>}
+
                   </div>
                 </div>
               </div>

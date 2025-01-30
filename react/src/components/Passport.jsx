@@ -3,14 +3,14 @@ import { ADToBS } from "bikram-sambat-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
-import logo from "../assets/passport-icon.png"
+import logo from "../assets/passport-icon.png";
 const Passport = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "smooth",
+  //   });
+  // }, []);
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -102,7 +102,23 @@ const Passport = () => {
       navigate("/form-success");
     } catch (err) {
       console.error("Error from backend:", err.response.data);
-      setErrors(err.response.data.errors || { msg: err.response.data.msg });
+
+      // Handle express-validator array format
+      if (
+        err.response.data?.errors &&
+        Array.isArray(err.response.data.errors)
+      ) {
+        const errorArray = err.response.data.errors;
+        const errorMessages = {};
+        errorArray.forEach((error) => {
+          errorMessages[error.path] = error.msg; // Convert array to object
+        });
+        setErrors(errorMessages);
+      }
+      // Handle other error formats
+      else {
+        setErrors(err.response.data || { msg: "An error occurred" });
+      }
     }
   };
 
@@ -123,9 +139,9 @@ const Passport = () => {
             <p className="text-blue-100 text-center mt-2">
               Government of Nepal
             </p>
-             <span className='absolute hidden md:block left-2 md:left-8 md:top-8 top-12'>
-                          <img src={logo} alt="logo" className="w-16 h-16 "  />
-                        </span>
+            <span className="absolute hidden md:block left-2 md:left-8 md:top-8 top-12">
+              <img src={logo} alt="logo" className="w-16 h-16 " />
+            </span>
           </div>
 
           <div className="p-6 sm:p-8">
@@ -145,6 +161,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.surname && (
+                      <span className={errorStyle}>{errors.surname}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Given Name</label>
@@ -155,6 +174,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                     {errors.givenName && (
+                      <span className={errorStyle}>{errors.givenName}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Nationality</label>
@@ -168,6 +190,9 @@ const Passport = () => {
                       <option value="nepalese">Nepalese</option>
                       <option value="others">Others</option>
                     </select>
+                    {errors.nationality && (
+                      <span className={errorStyle}>{errors.nationality}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Sex</label>
@@ -182,6 +207,9 @@ const Passport = () => {
                       <option value="Female">Female</option>
                       <option value="Others">Other</option>
                     </select>
+                    {errors.sex && (
+                      <span className={errorStyle}>{errors.sex}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -201,6 +229,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                     {errors.dobAd && (
+                      <span className={errorStyle}>{errors.dobAd}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Date of Birth (BS)</label>
@@ -221,6 +252,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                     {errors.placeOfBirth && (
+                      <span className={errorStyle}>{errors.placeOfBirth}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Citizenship Number</label>
@@ -231,6 +265,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.citizenshipNumber && (
+                      <span className={errorStyle}>{errors.citizenshipNumber}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -250,6 +287,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                     {errors.dateOfIssue && (
+                      <span className={errorStyle}>{errors.dateOfIssue}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Place of Issue</label>
@@ -260,6 +300,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.placeOfIssue && (
+                      <span className={errorStyle}>{errors.placeOfIssue}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -279,6 +322,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.district && (
+                      <span className={errorStyle}>{errors.district}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Municipality</label>
@@ -289,6 +335,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.municipality && (
+                      <span className={errorStyle}>{errors.municipality}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Ward No</label>
@@ -299,6 +348,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.wardNo && (
+                      <span className={errorStyle}>{errors.wardNo}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Tole</label>
@@ -309,6 +361,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.tole && (
+                      <span className={errorStyle}>{errors.tole}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -328,6 +383,7 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+
                   </div>
                   <div>
                     <label className={labelStyle}>Phone</label>
@@ -338,6 +394,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.phone && (
+                      <span className={errorStyle}>{errors.phone}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -357,6 +416,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.nextOfKin && (
+                      <span className={errorStyle}>{errors.nextOfKin}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Relationship</label>
@@ -367,6 +429,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.relationship && (
+                      <span className={errorStyle}>{errors.relationship}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Next of Kin Phone</label>
@@ -377,6 +442,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.nextOfKinPhone && (
+                      <span className={errorStyle}>{errors.nextOfKinPhone}</span>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Next of Kin Address</label>
@@ -387,6 +455,9 @@ const Passport = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
+                    {errors.address && (
+                      <span className={errorStyle}>{errors.address}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -405,6 +476,9 @@ const Passport = () => {
                     onChange={handleChange}
                     className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
                   />
+                  {errors.userImage && (
+                      <span className={errorStyle}>{errors.userImage}</span>
+                    )}
                 </div>
               </div>
 

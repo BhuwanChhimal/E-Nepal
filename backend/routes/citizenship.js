@@ -39,6 +39,7 @@ router.post(
     check('parentCitizenshipNumber', 'Parent\'s citizenship number is required').not().isEmpty(),
     check('citizenshipType', 'Citizenship type is required').not().isEmpty(),
     check('reason', 'Reason is required').not().isEmpty(),
+    check('image', "Image is required").not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);

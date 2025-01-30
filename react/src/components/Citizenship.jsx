@@ -89,7 +89,21 @@ const Citizenship = () => {
       setErrors({});
       navigate('/form-success');
     } catch (err) {
-      setErrors(err.response.data.errors || { msg: err.response.data.msg });
+      console.error('Error from backend:', err.response.data);
+      
+      // Handle express-validator array format
+      if (err.response.data?.errors && Array.isArray(err.response.data.errors)) {
+        const errorArray = err.response.data.errors;
+        const errorMessages = {};
+        errorArray.forEach(error => {
+          errorMessages[error.path] = error.msg; // Convert array to object
+        });
+        setErrors(errorMessages);
+      }
+      // Handle other error formats
+      else {
+        setErrors(err.response.data || { msg: 'An error occurred' });
+      }
     }
   };
 

@@ -26,15 +26,14 @@ router.post(
         check('dob', 'Date of Birth is required').isDate(),
         check('citizenshipNumber', 'Citizenship number is required').not().isEmpty(),
         check('bloodGroup', 'Blood Group is required').not().isEmpty(),
-  
         check('district', 'District is required').not().isEmpty(),
         check('municipality', 'Municipality is required').not().isEmpty(),
         check('wardNo', 'Ward number is required').not().isEmpty(),
         check('tole', 'Tole is required').not().isEmpty(),
-        check('email', 'Email is required').isEmail(),
         check('phone', 'Phone number is required').isMobilePhone(),
         check('category', 'Category is required').not().isEmpty(),
         check('licenseType', 'License Type is required').not().isEmpty(),
+        check('userImage', 'Image is required').not().isEmpty(),
     ],
 
     async (req, res) => {

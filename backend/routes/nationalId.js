@@ -35,6 +35,9 @@ router.post(
     check('temporaryDistrict', 'District is required').not().isEmpty(),
     check('temporaryWardNumber', 'Ward Number is required').not().isEmpty(),
     check('citizenshipNumber', 'Citizenship number is required').not().isEmpty(),
+    check('citizenshipImage',"Image is required").not().isEmpty(),
+    check('passportImage',"Image is required").not().isEmpty(),
+    
   ],
   async (req, res) => {
     const errors = validationResult(req);

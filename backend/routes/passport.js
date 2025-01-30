@@ -25,6 +25,7 @@ router.post(
   [
     check('surname', 'Surname is required').not().isEmpty(),
     check('givenName', 'Given name is required').not().isEmpty(),
+    check('sex',"Gender is required").not().isEmpty(),
     check('dobAd', 'Date of Birth is required').isDate(),
     check('dobBs', 'Date of Birth is required').isDate(),
     check('nationality', 'Nationality is required').not().isEmpty(),
@@ -36,12 +37,12 @@ router.post(
     check('municipality', 'Municipality is required').not().isEmpty(),
     check('wardNo', 'Ward number is required').not().isEmpty(),
     check('tole', 'Tole is required').not().isEmpty(),
-    check('email', 'Email is required').isEmail(),
     check('phone', 'Phone number is required').isMobilePhone(),
     check('nextOfKin', 'Next of kin is required').not().isEmpty(),
     check('address', 'Address is required').not().isEmpty(),
     check('relationship', 'Relationship is required').not().isEmpty(),
-    check('nextOfKinPhone', 'Next of kin phone number is required').isMobilePhone(),
+    check('nextOfKinPhone', 'Next of kin phone number is required').not().isEmpty(),
+    check('userImage', 'Image is required').not().isEmpty(),
     
 
   ],

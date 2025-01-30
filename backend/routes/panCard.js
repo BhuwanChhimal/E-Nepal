@@ -31,9 +31,10 @@ router.post(
         check('municipality', 'Municipality is required').not().isEmpty(),
         check('wardNo', 'Ward number is required').not().isEmpty(),
         check('tole', 'Tole is required').not().isEmpty(),
-        check('email', 'Email is required').isEmail(),
+
         check('phone', 'Phone number is required').isMobilePhone(),
         check('occupation', 'Occupation is required').not().isEmpty(),
+        check('userImage', 'Image is required').not().isEmpty(),
     ],
 
     async (req, res) => {

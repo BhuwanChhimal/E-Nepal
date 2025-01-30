@@ -2,8 +2,8 @@ import axios from "axios";
 import { ADToBS } from "bikram-sambat-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useAuth } from '../context/AuthContext';
-import logo from "../assets/pan-card-icon.png"
+import { useAuth } from "../context/AuthContext";
+import logo from "../assets/pan-card-icon.png";
 const PanCard = () => {
   useEffect(() => {
     window.scrollTo({
@@ -38,12 +38,14 @@ const PanCard = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'image') {
+    if (name === "image") {
       setFormData({ ...formData, image: files[0] });
-    } else if (name === 'dobAd') {
+    } else if (name === "dobAd") {
       const adDate = new Date(value);
       if (!isNaN(adDate)) {
-        const adDateString = `${adDate.getFullYear()}-${adDate.getMonth() + 1}-${adDate.getDate()}`;
+        const adDateString = `${adDate.getFullYear()}-${
+          adDate.getMonth() + 1
+        }-${adDate.getDate()}`;
         const bsDate = ADToBS(adDateString);
         setFormData((prevFormData) => ({
           ...prevFormData,
@@ -62,8 +64,8 @@ const PanCard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!token) {
-      console.error('No token found');
-      setErrors({ msg: 'No token found' });
+      console.error("No token found");
+      setErrors({ msg: "No token found" });
       return;
     }
 
@@ -75,22 +77,40 @@ const PanCard = () => {
 
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       };
 
-      const res = await axios.post('http://localhost:5001/api/panCard', formData, config);
+      const res = await axios.post(
+        "http://localhost:5001/api/panCard",
+        formData,
+        config
+      );
       setSuccessMessage(res.data.msg);
       setErrors({});
-      navigate('/form-success');
+      navigate("/form-success");
     } catch (err) {
       console.error('Error from backend:', err.response.data);
-      setErrors(err.response.data.errors || { msg: err.response.data.msg });
+      
+      // Handle express-validator array format
+      if (err.response.data?.errors && Array.isArray(err.response.data.errors)) {
+        const errorArray = err.response.data.errors;
+        const errorMessages = {};
+        errorArray.forEach(error => {
+          errorMessages[error.path] = error.msg; // Convert array to object
+        });
+        setErrors(errorMessages);
+      }
+      // Handle other error formats
+      else {
+        setErrors(err.response.data || { msg: 'An error occurred' });
+      }
     }
   };
 
-  const inputStyle = "w-full border border-blue-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 focus:border-blue-500";
+  const inputStyle =
+    "w-full border border-blue-gray-300 rounded-md p-2 focus:ring-1 focus:ring-blue-500 focus:border-blue-500";
   const labelStyle = "block text-sm font-medium text-gray-700 mb-1";
   const errorStyle = "text-red-500 text-sm mt-1";
 
@@ -106,9 +126,9 @@ const PanCard = () => {
             <p className="text-blue-100 text-center mt-2">
               Government of Nepal
             </p>
-             <span className='absolute hidden md:block left-2 md:left-8 md:top-8 top-12'>
-                          <img src={logo} alt="logo" className="w-16 h-16 "  />
-                        </span>
+            <span className="absolute hidden md:block left-2 md:left-8 md:top-8 top-12">
+              <img src={logo} alt="logo" className="w-16 h-16 " />
+            </span>
           </div>
 
           <div className="p-6 sm:p-8">
@@ -128,7 +148,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.fullName && <p className={errorStyle}>{errors.fullName}</p>}
+                    {errors.fullName && (
+                      <p className={errorStyle}>{errors.fullName}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Father's Name</label>
@@ -139,7 +161,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.fatherName && <p className={errorStyle}>{errors.fatherName}</p>}
+                    {errors.fatherName && (
+                      <p className={errorStyle}>{errors.fatherName}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Date of Birth</label>
@@ -161,7 +185,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.citizenshipNumber && <p className={errorStyle}>{errors.citizenshipNumber}</p>}
+                    {errors.citizenshipNumber && (
+                      <p className={errorStyle}>{errors.citizenshipNumber}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -172,7 +198,6 @@ const PanCard = () => {
                   Address Details
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                   <div>
                     <label className={labelStyle}>District</label>
                     <input
@@ -182,7 +207,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.district && <p className={errorStyle}>{errors.district}</p>}
+                    {errors.district && (
+                      <p className={errorStyle}>{errors.district}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Municipality</label>
@@ -193,7 +220,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.municipality && <p className={errorStyle}>{errors.municipality}</p>}
+                    {errors.municipality && (
+                      <p className={errorStyle}>{errors.municipality}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Ward No</label>
@@ -204,7 +233,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.wardNo && <p className={errorStyle}>{errors.wardNo}</p>}
+                    {errors.wardNo && (
+                      <p className={errorStyle}>{errors.wardNo}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Tole</label>
@@ -235,7 +266,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.email && <p className={errorStyle}>{errors.email}</p>}
+                    {errors.email && (
+                      <p className={errorStyle}>{errors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Phone</label>
@@ -246,7 +279,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.phone && <p className={errorStyle}>{errors.phone}</p>}
+                    {errors.phone && (
+                      <p className={errorStyle}>{errors.phone}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelStyle}>Occupation</label>
@@ -257,7 +292,9 @@ const PanCard = () => {
                       onChange={handleChange}
                       className={inputStyle}
                     />
-                    {errors.occupation && <p className={errorStyle}>{errors.occupation}</p>}
+                    {errors.occupation && (
+                      <p className={errorStyle}>{errors.occupation}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -276,7 +313,9 @@ const PanCard = () => {
                     onChange={handleChange}
                     className={`${inputStyle} file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100`}
                   />
-                  {errors.userImage && <p className={errorStyle}>{errors.userImage}</p>}
+                  {errors.userImage && (
+                    <p className={errorStyle}>{errors.userImage}</p>
+                  )}
                 </div>
               </div>
 

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
-import axios from 'axios';
-import logo from "../assets/complaintbox-icon.png"
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import logo from "../assets/complaintbox-icon.png";
 const ComplaintBox = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -16,13 +16,97 @@ const ComplaintBox = () => {
   });
 
   const districts = {
-    Koshi: ["Bhojpur", "Dhankuta", "Ilam", "Jhapa", "Khotang", "Morang", "Okhaldhunga", "Panchthar", "Sankhuwasabha", "Solukhumbu", "Sunsari", "Taplejung", "Terhathum", "Udayapur"],
-    Madhesh: ["Saptari", "Siraha", "Dhanusa", "Mahottari", "Sarlahi", "Bara", "Parsa", "Rautahat"],
-    Bagmati: ["Sindhuli", "Ramechhap", "Dolakha", "Bhaktapur", "Dhading", "Kathmandu", "Kavrepalanchok", "Lalitpur", "Nuwakot", "Rasuwa", "Sindhupalchok", "Chitwan", "Makwanpur"],
-    Gandaki: ["Baglung", "Gorkha", "Kaski", "Lamjung", "Manang", "Mustang", "Myagdi", "Nawalpur", "Parbat", "Syangja", "Tanahun"],
-    Lumbini: ["Kapilvastu", "Parasi", "Rupandehi", "Arghakhanchi", "Gulmi", "Palpa", "Dang", "Pyuthan", "Rolpa", "Eastern Rukum", "Banke", "Bardiya"],
-    Karnali: ["Western Rukum", "Salyan", "Dolpa", "Humla", "Jumla", "Kalikot", "Mugu", "Surkhet", "Dailekh", "Jajarkot"],
-    Sudurpashchim: ["Kailali", "Achham", "Doti", "Bajhang", "Bajura", "Kanchanpur", "Dadeldhura", "Baitadi", "Darchula"],
+    Koshi: [
+      "Bhojpur",
+      "Dhankuta",
+      "Ilam",
+      "Jhapa",
+      "Khotang",
+      "Morang",
+      "Okhaldhunga",
+      "Panchthar",
+      "Sankhuwasabha",
+      "Solukhumbu",
+      "Sunsari",
+      "Taplejung",
+      "Terhathum",
+      "Udayapur",
+    ],
+    Madhesh: [
+      "Saptari",
+      "Siraha",
+      "Dhanusa",
+      "Mahottari",
+      "Sarlahi",
+      "Bara",
+      "Parsa",
+      "Rautahat",
+    ],
+    Bagmati: [
+      "Sindhuli",
+      "Ramechhap",
+      "Dolakha",
+      "Bhaktapur",
+      "Dhading",
+      "Kathmandu",
+      "Kavrepalanchok",
+      "Lalitpur",
+      "Nuwakot",
+      "Rasuwa",
+      "Sindhupalchok",
+      "Chitwan",
+      "Makwanpur",
+    ],
+    Gandaki: [
+      "Baglung",
+      "Gorkha",
+      "Kaski",
+      "Lamjung",
+      "Manang",
+      "Mustang",
+      "Myagdi",
+      "Nawalpur",
+      "Parbat",
+      "Syangja",
+      "Tanahun",
+    ],
+    Lumbini: [
+      "Kapilvastu",
+      "Parasi",
+      "Rupandehi",
+      "Arghakhanchi",
+      "Gulmi",
+      "Palpa",
+      "Dang",
+      "Pyuthan",
+      "Rolpa",
+      "Eastern Rukum",
+      "Banke",
+      "Bardiya",
+    ],
+    Karnali: [
+      "Western Rukum",
+      "Salyan",
+      "Dolpa",
+      "Humla",
+      "Jumla",
+      "Kalikot",
+      "Mugu",
+      "Surkhet",
+      "Dailekh",
+      "Jajarkot",
+    ],
+    Sudurpashchim: [
+      "Kailali",
+      "Achham",
+      "Doti",
+      "Bajhang",
+      "Bajura",
+      "Kanchanpur",
+      "Dadeldhura",
+      "Baitadi",
+      "Darchula",
+    ],
   };
 
   const [errors, setErrors] = useState({});
@@ -69,7 +153,24 @@ const ComplaintBox = () => {
       setErrors({});
       navigate("/form-success");
     } catch (err) {
-      setErrors(err.response.data.errors || { msg: err.response.data.msg });
+      console.error("Error from backend:", err.response.data);
+
+      // Handle express-validator array format
+      if (
+        err.response.data?.errors &&
+        Array.isArray(err.response.data.errors)
+      ) {
+        const errorArray = err.response.data.errors;
+        const errorMessages = {};
+        errorArray.forEach((error) => {
+          errorMessages[error.path] = error.msg; // Convert array to object
+        });
+        setErrors(errorMessages);
+      }
+      // Handle other error formats
+      else {
+        setErrors(err.response.data || { msg: "An error occurred" });
+      }
     }
   };
 
@@ -77,21 +178,16 @@ const ComplaintBox = () => {
     <div className="max-w-4xl mx-auto my-8 bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Header Section */}
       <div className="bg-gradient-to-r relative from-red-400 to-red-600 px-6 py-8 text-center">
-        <h2 className="text-3xl font-bold text-white mb-2">Submit a Complaint</h2>
+        <h2 className="text-3xl font-bold text-white mb-2">
+          Submit a Complaint
+        </h2>
         <p className="text-blue-100">
           Please provide detailed information about your complaint
         </p>
-         <span className='absolute hidden md:block left-2 md:left-8 md:top-8 top-12'>
-                      <img src={logo} alt="logo" className="w-16 h-16 "  />
-                    </span>
+        <span className="absolute hidden md:block left-2 md:left-8 md:top-8 top-12">
+          <img src={logo} alt="logo" className="w-16 h-16 " />
+        </span>
       </div>
-
-      {/* Error Message */}
-      {errors.msg && (
-        <div className="bg-red-50 text-red-700 p-4 mb-6 border-l-4 border-red-500">
-          {errors.msg}
-        </div>
-      )}
 
       {/* Form Section */}
       <div className="p-6 md:p-8">
@@ -117,6 +213,9 @@ const ComplaintBox = () => {
                 <option value="Karnali">6. Karnali</option>
                 <option value="Sudurpashchim">7. Sudurpashchim</option>
               </select>
+              {errors.province && (
+                <p className="mt-1 text-sm text-red-600">{errors.province}</p>
+              )}
             </div>
 
             {/* District Selection */}
@@ -137,6 +236,9 @@ const ComplaintBox = () => {
                   </option>
                 ))}
               </select>
+              {errors.district && (
+                <p className="mt-1 text-sm text-red-600">{errors.district}</p>
+              )}
             </div>
 
             {/* Municipality Input */}
@@ -152,6 +254,11 @@ const ComplaintBox = () => {
                 placeholder="Enter municipality name"
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200 bg-white shadow-sm"
               />
+              {errors.municipality && (
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.municipality}
+                </p>
+              )}
             </div>
 
             {/* Department Selection */}
@@ -173,6 +280,9 @@ const ComplaintBox = () => {
                 <option value="Education">Education</option>
                 <option value="Other">Other</option>
               </select>
+              {errors.department && (
+                <p className="mt-1 text-sm text-red-600">{errors.department}</p>
+              )}
             </div>
           </div>
 
@@ -189,6 +299,9 @@ const ComplaintBox = () => {
               placeholder="Please provide detailed information about your complaint..."
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 transition duration-200 bg-white shadow-sm resize-none"
             />
+            {errors.complaint && (
+              <p className="mt-1 text-sm text-red-600">{errors.complaint}</p>
+            )}
           </div>
 
           {/* Submit Button */}
