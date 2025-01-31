@@ -147,6 +147,7 @@ const PanCard = () => {
                       value={formData.fullName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Full Name"
                     />
                     {errors.fullName && (
                       <p className={errorStyle}>{errors.fullName}</p>
@@ -160,6 +161,7 @@ const PanCard = () => {
                       value={formData.fatherName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Father's Name"
                     />
                     {errors.fatherName && (
                       <p className={errorStyle}>{errors.fatherName}</p>
@@ -184,6 +186,7 @@ const PanCard = () => {
                       value={formData.citizenshipNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Citizenship Number"
                     />
                     {errors.citizenshipNumber && (
                       <p className={errorStyle}>{errors.citizenshipNumber}</p>
@@ -206,6 +209,7 @@ const PanCard = () => {
                       value={formData.district}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="District"
                     />
                     {errors.district && (
                       <p className={errorStyle}>{errors.district}</p>
@@ -219,6 +223,7 @@ const PanCard = () => {
                       value={formData.municipality}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Municipality"
                     />
                     {errors.municipality && (
                       <p className={errorStyle}>{errors.municipality}</p>
@@ -232,6 +237,7 @@ const PanCard = () => {
                       value={formData.wardNo}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Ward No."
                     />
                     {errors.wardNo && (
                       <p className={errorStyle}>{errors.wardNo}</p>
@@ -245,6 +251,7 @@ const PanCard = () => {
                       value={formData.tole}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Tole"
                     />
                     {errors.tole && <p className={errorStyle}>{errors.tole}</p>}
                   </div>
@@ -265,6 +272,7 @@ const PanCard = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Email"
                     />
                     {errors.email && (
                       <p className={errorStyle}>{errors.email}</p>
@@ -278,6 +286,7 @@ const PanCard = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Phone No."
                     />
                     {errors.phone && (
                       <p className={errorStyle}>{errors.phone}</p>
@@ -291,6 +300,7 @@ const PanCard = () => {
                       value={formData.occupation}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Occupation/Job"
                     />
                     {errors.occupation && (
                       <p className={errorStyle}>{errors.occupation}</p>

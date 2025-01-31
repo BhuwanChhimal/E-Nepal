@@ -160,6 +160,7 @@ const Passport = () => {
                       value={formData.surname}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Surname"
                     />
                     {errors.surname && (
                       <span className={errorStyle}>{errors.surname}</span>
@@ -173,6 +174,7 @@ const Passport = () => {
                       value={formData.givenName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Give Name"
                     />
                      {errors.givenName && (
                       <span className={errorStyle}>{errors.givenName}</span>
@@ -185,6 +187,7 @@ const Passport = () => {
                       value={formData.nationality}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Nationality"
                     >
                       <option value="">Choose your nationality</option>
                       <option value="nepalese">Nepalese</option>
@@ -195,12 +198,13 @@ const Passport = () => {
                     )}
                   </div>
                   <div>
-                    <label className={labelStyle}>Sex</label>
+                    <label className={labelStyle}>Gender</label>
                     <select
                       name="sex"
                       value={formData.sex}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Gender"
                     >
                       <option value="">Select Sex</option>
                       <option value="Male">Male</option>
@@ -228,6 +232,7 @@ const Passport = () => {
                       value={formData.dobAd}
                       onChange={handleChange}
                       className={inputStyle}
+                     
                     />
                      {errors.dobAd && (
                       <span className={errorStyle}>{errors.dobAd}</span>
@@ -236,11 +241,12 @@ const Passport = () => {
                   <div>
                     <label className={labelStyle}>Date of Birth (BS)</label>
                     <input
-                      type="date"
+                      type="text"
                       name="dobBs"
                       value={formData.dobBs}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Auto-Filled"
                     />
                   </div>
                   <div>
@@ -250,6 +256,7 @@ const Passport = () => {
                       name="placeOfBirth"
                       value={formData.placeOfBirth}
                       onChange={handleChange}
+                      placeholder="Place of Birth"
                       className={inputStyle}
                     />
                      {errors.placeOfBirth && (
@@ -264,6 +271,7 @@ const Passport = () => {
                       value={formData.citizenshipNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Citizenship Number"
                     />
                     {errors.citizenshipNumber && (
                       <span className={errorStyle}>{errors.citizenshipNumber}</span>
@@ -286,6 +294,7 @@ const Passport = () => {
                       value={formData.dateOfIssue}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Date of issue"
                     />
                      {errors.dateOfIssue && (
                       <span className={errorStyle}>{errors.dateOfIssue}</span>
@@ -299,6 +308,7 @@ const Passport = () => {
                       value={formData.placeOfIssue}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Place of issue"
                     />
                     {errors.placeOfIssue && (
                       <span className={errorStyle}>{errors.placeOfIssue}</span>
@@ -321,6 +331,7 @@ const Passport = () => {
                       value={formData.district}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="District"
                     />
                     {errors.district && (
                       <span className={errorStyle}>{errors.district}</span>
@@ -334,6 +345,7 @@ const Passport = () => {
                       value={formData.municipality}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Municipality"
                     />
                     {errors.municipality && (
                       <span className={errorStyle}>{errors.municipality}</span>
@@ -347,6 +359,7 @@ const Passport = () => {
                       value={formData.wardNo}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Ward No."
                     />
                     {errors.wardNo && (
                       <span className={errorStyle}>{errors.wardNo}</span>
@@ -360,6 +373,7 @@ const Passport = () => {
                       value={formData.tole}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Tole"
                     />
                     {errors.tole && (
                       <span className={errorStyle}>{errors.tole}</span>
@@ -382,6 +396,7 @@ const Passport = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Email"
                     />
 
                   </div>
@@ -393,6 +408,7 @@ const Passport = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Phone No."
                     />
                     {errors.phone && (
                       <span className={errorStyle}>{errors.phone}</span>
@@ -415,6 +431,7 @@ const Passport = () => {
                       value={formData.nextOfKin}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Next of Kin"
                     />
                     {errors.nextOfKin && (
                       <span className={errorStyle}>{errors.nextOfKin}</span>
@@ -428,6 +445,7 @@ const Passport = () => {
                       value={formData.relationship}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Relationship"
                     />
                     {errors.relationship && (
                       <span className={errorStyle}>{errors.relationship}</span>
@@ -441,6 +459,7 @@ const Passport = () => {
                       value={formData.nextOfKinPhone}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Next of Kin's Phone No."
                     />
                     {errors.nextOfKinPhone && (
                       <span className={errorStyle}>{errors.nextOfKinPhone}</span>
@@ -454,6 +473,7 @@ const Passport = () => {
                       value={formData.address}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Next of Kin's Address"
                     />
                     {errors.address && (
                       <span className={errorStyle}>{errors.address}</span>

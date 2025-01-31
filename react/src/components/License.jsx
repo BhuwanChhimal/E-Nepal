@@ -150,6 +150,7 @@ const License = () => {
                       value={formData.fullName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Full Name"
                     />
                     {errors.fullName && (
                       <p className={errorStyle}>{errors.fullName}</p>
@@ -163,6 +164,7 @@ const License = () => {
                       value={formData.dob}
                       onChange={handleChange}
                       className={inputStyle}
+
                     />
                     {errors.dob && <p className={errorStyle}>{errors.dob}</p>}
                   </div>
@@ -173,6 +175,7 @@ const License = () => {
                       value={formData.bloodGroup}
                       onChange={handleChange}
                       className={inputStyle}
+      
                     >
                       <option value="">Select Blood Group</option>
                       <option value="A+">A+</option>
@@ -196,6 +199,7 @@ const License = () => {
                       value={formData.citizenshipNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Citizenship No."
                     />
                     {errors.citizenshipNumber && (
                       <p className={errorStyle}>{errors.citizenshipNumber}</p>
@@ -218,6 +222,7 @@ const License = () => {
                       value={formData.district}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="District"
                     />
                     {errors.district && (
                       <p className={errorStyle}>{errors.district}</p>
@@ -231,6 +236,7 @@ const License = () => {
                       value={formData.municipality}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Municipality"
                     />
                     {errors.municipality && (
                       <p className={errorStyle}>{errors.municipality}</p>
@@ -244,6 +250,7 @@ const License = () => {
                       value={formData.wardNo}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Ward No."
                     />
                     {errors.wardNo && (
                       <p className={errorStyle}>{errors.wardNo}</p>
@@ -257,6 +264,7 @@ const License = () => {
                       value={formData.tole}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Tole"
                     />
                     {errors.tole && <p className={errorStyle}>{errors.tole}</p>}
                   </div>
@@ -276,6 +284,7 @@ const License = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      placeholder="Email"
                       className={inputStyle}
                     />
                     {errors.email && (
@@ -290,6 +299,7 @@ const License = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Phone No."
                     />
                     {errors.phone && (
                       <p className={errorStyle}>{errors.phone}</p>

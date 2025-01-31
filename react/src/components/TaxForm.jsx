@@ -236,6 +236,7 @@ const TaxForm = () => {
                       type="text"
                       value={formData.panNumber}
                       onChange={(e) => setPanNumber(e.target.value)}
+                      placeholder="Pan Number"
                       className="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                       disabled={panSubmitted}
                     />

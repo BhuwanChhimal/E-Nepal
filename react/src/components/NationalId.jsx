@@ -151,6 +151,7 @@ const NationalId = () => {
                       value={formData.firstName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="First Name"
                     />
                     {errors.firstName && (
                       <span className={errorStyle}>
@@ -166,6 +167,7 @@ const NationalId = () => {
                       value={formData.middleName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Middle Name"
                     />
                   </div>
                   <div>
@@ -176,6 +178,7 @@ const NationalId = () => {
                       value={formData.lastName}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Last Name"
                     />
                     {errors.lastName && (
                       <span className={errorStyle}>
@@ -225,6 +228,7 @@ const NationalId = () => {
                       type="text"
                       readOnly
                       name="dobBs"
+                      placeholder="Auto-filled"
                       value={formData.dobBs}
                       onChange={handleChange}
                       className={`${inputStyle} bg-blue-gray-100`}
@@ -239,6 +243,7 @@ const NationalId = () => {
                       value={formData.citizenshipNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Citizenship Number"
                     />
                     {errors.citizenshipNumber && <span className={errorStyle}>{errors.citizenshipNumber}</span>}
                   </div>
@@ -306,6 +311,7 @@ const NationalId = () => {
                       value={formData.permanentProvince}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Province"
                     />
                     {errors.permanentProvince && (
                       <span className={errorStyle}>
@@ -321,6 +327,7 @@ const NationalId = () => {
                       value={formData.permanentDistrict}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="District"
                     />
                     {errors.permanentDistrict && (
                       <span className={errorStyle}>
@@ -336,6 +343,7 @@ const NationalId = () => {
                       value={formData.permanentWardNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Ward No."
                     />
                     {errors.permanentWardNumber && (
                       <span className={errorStyle}>
@@ -360,6 +368,7 @@ const NationalId = () => {
                       value={formData.temporaryProvince}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Province"
                     />
                     {errors.temporaryProvince && <span className={errorStyle}>{errors.temporaryProvince}</span>}
                   </div>
@@ -371,6 +380,7 @@ const NationalId = () => {
                       value={formData.temporaryDistrict}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="District"
                     />
                     {errors.temporaryDistrict && <span className={errorStyle}>{errors.temporaryDistrict}</span>}
                   </div>
@@ -382,6 +392,7 @@ const NationalId = () => {
                       value={formData.temporaryWardNumber}
                       onChange={handleChange}
                       className={inputStyle}
+                      placeholder="Ward No."
                     />
                     {errors.temporaryWardNumber && <span className={errorStyle}>{errors.temporaryWardNumber}</span>}
 
