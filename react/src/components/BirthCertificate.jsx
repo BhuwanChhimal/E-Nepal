@@ -10,7 +10,7 @@ const BirthCertificate = () => {
       top: 0,
       behavior: 'smooth'
     });
-  }, []);
+  }, []); //scroll effect animation
 
   const [formData, setFormData] = useState({
     userId:"",

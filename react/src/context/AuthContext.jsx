@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = (token) => {
-    localStorage.setItem('token', token);
+    localStorage.setItem('token', token); //sets unique token on login by a user
     setToken(token);
   };
 
