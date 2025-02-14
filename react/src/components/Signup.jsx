@@ -23,7 +23,7 @@ const Signup = ({ handleFlip }) => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5001/api/auth/signup', formData);
-      // console.log('User registered:', res.data);
+      console.log('User registered:', res.data);
       handleFlip(); // Flip back to login after signup
     } catch (err) {
       console.error('Error registering user:', err.response.data);
